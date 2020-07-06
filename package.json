@@ -1,0 +1,29 @@
+{
+  "name": "cypress_learning",
+  "version": "1.0.0",
+  "description": "Automation for software testing with Cypress",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PabloPineda6/Cypress_Learning.git"
+  },
+  "keywords": [
+    "Testing",
+    "Cypress",
+    "Automation"
+  ],
+  "author": "Pablo Pineda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PabloPineda6/Cypress_Learning/issues"
+  },
+  "homepage": "https://github.com/PabloPineda6/Cypress_Learning#readme",
+  "dependencies": {
+    "cypress": "^4.9.0",
+    "prettier": "^2.0.5"
+  }
+}
