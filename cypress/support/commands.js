@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+
+Cypress.Commands.add("loginExample", (username, password) => {
+    cy.clearCookies()
+    cy.clearLocalStorage()
+    cy.get('#user_login').clear().type(username) // {delay: 10000} // Delay not working
+    cy.get('#user_password').type(password)
+    cy.get('#user_remember_me').click()
+    cy.contains('Sign in').click()
+})
