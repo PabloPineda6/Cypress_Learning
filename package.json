@@ -24,6 +24,7 @@
   "homepage": "https://github.com/PabloPineda6/Cypress_Learning#readme",
   "dependencies": {
     "cypress": "^4.9.0",
+    "cypress-xpath": "^1.6.0",
     "prettier": "^2.0.5"
   }
 }
