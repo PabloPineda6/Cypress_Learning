@@ -17,16 +17,16 @@ Automation for software testing with Cypress
 2. Open that folder with the explorer of Visual Studio Code
 
 ## Project configuration and Cypress install
-1. Open the therminal and type: npm init, and fill the information required (any info can be eddited or added later in the package.json file) 
-2. Install Cypress by typing: npm install cypress (the version installed can be checked in the package.json file)
+1. Open the therminal and type: `npm init`, and fill the information required (any info can be eddited or added later in the package.json file) 
+2. Install Cypress by typing: `npm install cypress` (the version installed can be checked in the package.json file)
 
-- Delete option not used in the file package.json, under the option "scripts": The option "test": "echo "Error: no test specified" && exit 1" won't be used, Let's delete it and place this two commands:
+- Delete option not used in the file package.json, under the option `"scripts": The option "test": "echo "Error: no test specified" && exit 1"` won't be used, Let's delete it and place this two commands:
 `"cy:open": "cypress open",
 "cy:run": "cypress run"`
 
 ## Prettier install and rules definition 
-1. Install Prettier by typing in the therminal: npm install prettier. Prettier is an automated code formating tool (the version installed can be checked in the package.json file) 
-2. Create a prettier configuration file named .prettierrc.json at the root of the project (right click - New file) 
+1. Install Prettier by typing in the therminal: `npm install prettier`. Prettier is an automated code formating tool (the version installed can be checked in the package.json file) 
+2. Create a prettier configuration file named `.prettierrc.json` at the root of the project (right click - New file) 
 3. Create a Json specifying the prettier rules for the project. This are the rules recomended in the course: 
 `{
     "semi": false,
@@ -40,7 +40,7 @@ Automation for software testing with Cypress
 
 ## Setup inteligent code completion (so you don't need to memorize all Cypress comands) 
 1. Open Cypress so it autogenerates it's Cypress folder and structures by typing: npx cypress open 
-2. It generates a file cypress.json and a folder names cypress. Create a new file in the cypress folder named tsconfig.json 
+2. It generates a file cypress.json and a folder names cypress. Create a new file in the cypress folder named `tsconfig.json`
 3. Copy and paste the next Json to configurate the inteligent code completion: 
 `{
     "compilerOptions": {
