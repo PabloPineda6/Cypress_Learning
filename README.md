@@ -5,9 +5,9 @@ Automation for software testing with Cypress
 # This project is being created following the course: Automated Software Testing With Cypress [2020], part of the platform www.Udemy.com. The code editor used is Visual Studio Code
 
 # Cypress comands for using in the therminal
-- **npm run cy:open** to open cypress "cypress open"
-- **npm run cy:run** to run tests in Headless mode "cypress run" (Cypress will run all tests without a browser displaying)
-- **npx cypress run --spec="cypress/integration/examples/scroll.spec.js"** (npx cypress run --spec="route to spec from root") to run specific test in Headless mode
+- `npm run cy:open` to open cypress "cypress open"
+- `npm run cy:run` to run tests in Headless mode "cypress run" (Cypress will run all tests without a browser displaying)
+- `npx cypress run --spec="cypress/integration/examples/scroll.spec.js"` (npx cypress run --spec="route to spec from root") to run specific test in Headless mode
 
 ## Assertion
 `.should('have.value', '...'), // or other options instead of have.value`
@@ -20,7 +20,7 @@ Automation for software testing with Cypress
 1. Open the therminal and type: `npm init`, and fill the information required (any info can be eddited or added later in the package.json file) 
 2. Install Cypress by typing: `npm install cypress` (the version installed can be checked in the package.json file)
 
-- Delete option not used in the file package.json, under the option `"scripts": The option "test": "echo "Error: no test specified" && exit 1"` won't be used, Let's delete it and place this two commands:
+- Delete option not used in the file package.json, under the option **"scripts"**: The option `"test": "echo "Error: no test specified" && exit 1"` won't be used, Let's delete it and place this two commands to configure how to run the project through the command window or terminal:
 `"cy:open": "cypress open",
 "cy:run": "cypress run"`
 
