@@ -21,8 +21,10 @@ Automation for software testing with Cypress
 2. Install Cypress by typing: `npm install cypress` (the version installed can be checked in the package.json file)
 
 - Delete option not used in the file package.json, under the option **"scripts"**: The option `"test": "echo "Error: no test specified" && exit 1"` won't be used, Let's delete it and place this two commands to configure how to run the project through the command window or terminal:
-`"cy:open": "cypress open",
-"cy:run": "cypress run"`
+```
+"cy:open": "cypress open",
+"cy:run": "cypress run"
+```
 
 ## Prettier install and rules definition 
 1. Install Prettier by typing in the therminal: `npm install prettier`. Prettier is an automated code formating tool (the version installed can be checked in the package.json file) 
