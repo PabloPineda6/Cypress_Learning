@@ -69,7 +69,7 @@ Automation for software testing with Cypress
     "viewportWidth": 1000, // default: 1000
     "viewportHeight": 600, // default: 600
     "waitForAnimation": true, // if true: wait for animation to finish before next action
-    "animationDistanceTreshold": 20, // ammount of pixels that need to change for Cipress to consider it an animation and use yhe wait for animation command
+    "animationDistanceTreshold": 20, // ammount of pixels that need to change for Cipress to consider it an animation and use the wait for animation command
     "defaultCommandTimeout": 5000, // default: 4 seconds = 4000 ms, but is typical to use 5000 ms
     "execTimeout": 6000, // time to wait for exit functions before timeout, one minute: 6000 ms is recommended
     "pageLoadTimeout": 6000, // how long to wait until load event is finished, 1 minute recomended
