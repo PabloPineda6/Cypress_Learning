@@ -28,7 +28,8 @@ Automation for software testing with Cypress
 1. Install Prettier by typing in the therminal: `npm install prettier`. Prettier is an automated code formating tool (the version installed can be checked in the package.json file) 
 2. Create a prettier configuration file named `.prettierrc.json` at the root of the project (right click - New file) 
 3. Create a Json specifying the prettier rules for the project. This are the rules recomended in the course: 
-`{
+```
+{
     "semi": false,
     "singleQuote": true,
     "useTabs": true,
@@ -36,13 +37,15 @@ Automation for software testing with Cypress
     "bracketSpacing": true,
     "arrowParens": "avoid",
     "trailingComma": "es5"
-}`
+}
+```
 
 ## Setup inteligent code completion (so you don't need to memorize all Cypress comands) 
 1. Open Cypress so it autogenerates it's Cypress folder and structures by typing: npx cypress open 
 2. It generates a file cypress.json and a folder names cypress. Create a new file in the cypress folder named `tsconfig.json`
 3. Copy and paste the next Json to configurate the inteligent code completion: 
-`{
+```
+{
     "compilerOptions": {
         "allowJs": true,
         "baseUrl": "../node_modules",
@@ -53,10 +56,12 @@ Automation for software testing with Cypress
     "include": [
         "**/*.*"
     ]
-}`
+}
+```
 
 ## cypress.json file configuration (commonly used options) must erase comments for file to work
-`{
+```
+{
     "baseUrl": "https://www.google.com/", // base URL of your specific project
     "whatchForFileChanges": false, // if true: every change you save activtes automation running
     "viewportWidth": 1000, // default: 1000
@@ -70,19 +75,22 @@ Automation for software testing with Cypress
     "responseTimeout": 15000, // how long to wait for an answer from the server, usuallu 15 s
     "video": false, // if true: Cypress  video when executing on headless mode
     "failOnStatusCode": false // if true: Cypress returns error on server responses diferent from 2xx or 3xx
-}`
+}
+```
 
 ## Custom commands creation at file support \ commands.json
 example login command:
 
-`Cypress.Commands.add("loginExample", (username, password) => {
+```
+Cypress.Commands.add("loginExample", (username, password) => {
     cy.clearCookies()
     cy.clearLocalStorage()
     cy.get('#user_login').clear().type(username) // {delay: 10000} // Delay not working
     cy.get('#user_password').type(password)
     cy.get('#user_remember_me').click()
     cy.contains('Sign in').click()
-})`
+})
+```
 
 ## Course archives generation order in integration \ examples
  1. simple.spec.js
