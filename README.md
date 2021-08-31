@@ -131,7 +131,7 @@ Cypress.Commands.add("loginExample", (username, password) => {
 23. transfer_funds.spec.js
 24. find_transaction.spec.js
 
-## Visual Regression Testing guide + Percy (in in integration \ visual_regression folder)
+## Visual Regression Testing guide + Percy (in in integration \ visual_regressions folder)
 First we need to make sure Cypress is installed and install the Cypress image snapshot plugin by typing: `npm install cypress-image-snapshot` in the therminal (the version installed can be checked in the package.json file).
 * If asked to install peer library or plugin, use `npm install --save-dev required_peer_version`. For example `npm install --save-dev jest@25.4.0` (I got the Warning: `npm WARN jest-image-snapshot@4.2.0 requires a peer of jest@>=20 <=26 but none is installed. You must install peer dependencies yourself.`)
 * Then, we edited the `cypress/plugins/index.js` to create the variable `const { addMatchImageSnapshotPlugin } = require("cypress-image-snapshot/plugin")` and use it in the module export by adding `addMatchImageSnapshotPlugin(on, config)`
