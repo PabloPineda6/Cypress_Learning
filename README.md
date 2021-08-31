@@ -98,7 +98,8 @@ Cypress.Commands.add("loginExample", (username, password) => {
 })
 ```
 
-# Course archives generation order in integration \ examples
+# Course archives generation order 
+## First files (in integration \ examples folder)
  1. simple.spec.js
  2. web_navigation.spec.js
  3. device_responsive.spec.js
@@ -116,8 +117,7 @@ Cypress.Commands.add("loginExample", (username, password) => {
     b. In support \ index.js, require plugin by typing: **require('cypress-xpath')**
 14. $.spec.js - jQuery use, not recommended because Cypress methods are faster and consume less memory
 
-## E2E guide start
-### Creation of e2e_tests folder
+## E2E tests guide (in in integration \ e2e_tests folder)
 15. search.spec.js - it's not trully an E2E, we are just refreshing concepts and warming up
 16. password.spec.js - Simple E2E to keep warming up
 17. navbar.spec.js - Still quite simple E2E
@@ -126,4 +126,6 @@ Cypress.Commands.add("loginExample", (username, password) => {
 20. new_payee.spec.js
 21. payment.spec.js
 22. currency_exchange.spec.js
-23. 
+23. transfer_funds.spec.js
+24. find_transaction.spec.js
+25. 
