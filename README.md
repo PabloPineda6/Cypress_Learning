@@ -10,7 +10,7 @@ Automation for software testing with Cypress
 - `npx cypress run --spec="cypress/integration/examples/scroll.spec.js"` (npx cypress run --spec="route to spec from root") to run specific test in Headless mode
 
 ## Assertion
-`.should('have.value', '...'), // or other options instead of have.value`
+`.should('have.value', '...'), // or other options instead of have.value, like 'be.visible', 'include.value', etc.`
 
 ## To configurate the project 
 1. Create a containing folder in your PC 
@@ -22,9 +22,11 @@ Automation for software testing with Cypress
     1.2. (Windows) Open Control Panel -> User Accounts -> Change my environmental variable and verify the path Variable value “C:\Program Files (x86)\nodejs” or “C:\Program Files \nodejs “.
     1.3. (Windows) new => user = path => value = C:\Program Files (x86)\nodejs and after apply that and close Editor and restart it.
 2. Open the therminal and type: `npm init`, -> and fill the information required (any info can be eddited or added later in the package.json file), so you can just click enter as meny times as required.
-3. Install Cypress by typing: `npm install cypress` (the version installed can be checked in the package.json file)
+3. Install Cypress by typing: `npm install cypress` (the version installed can be checked in the **package.json** file)
 
-- Delete option not used in the file package.json, under the option **"scripts"**: The option `"test": "echo "Error: no test specified" && exit 1"` won't be used, Let's delete it and place this two commands to configure how to run the project through the command window or terminal:
+* If asked to install peer library or plugin, use `npm install --save-dev required_peer_version`. For example `npm install --save-dev jest@25.4.0` (in other part of the tutorial, I got the Warning: `npm WARN jest-image-snapshot@4.2.0 requires a peer of jest@>=20 <=26 but none is installed. You must install peer dependencies yourself.`)
+
+- Now, in the **package.json** file, delete option not used, under the option **"scripts"**: The option `"test": "echo "Error: no test specified" && exit 1"` won't be used, Let's delete it and place this two commands to configure how to run the project through the command window or terminal:
 ```
 "cy:open": "cypress open",
 "cy:run": "cypress run"
@@ -32,7 +34,7 @@ Automation for software testing with Cypress
 
 ### Prettier install and rules definition 
 1. Install Prettier by typing in the therminal: `npm install prettier`. Prettier is an automated code formating tool (the version installed can be checked in the package.json file) 
-2. Create a prettier configuration file named `.prettierrc.json` at the root of the project (right click - New file) 
+2. Create a prettier configuration file named **.prettierrc.json** at the root of the project (right click - New file) 
 3. Create a Json specifying the prettier rules for the project. This are the rules recomended in the course: 
 ```
 {
@@ -48,7 +50,7 @@ Automation for software testing with Cypress
 
 ### Setup inteligent code completion (so you don't need to memorize all Cypress comands) 
 1. Open Cypress so it autogenerates it's Cypress folder and structures by typing: `npx cypress open` or `npm run cy:open` (thanks to the configuration we did in the file package.json)
-2. It generates a file cypress.json and a folder names cypress. Create a new file in the cypress folder named `tsconfig.json`
+2. It generates a file cypress.json and a folder names cypress. Create a new file in the cypress folder named **tsconfig.json**
 3. Copy and paste the next Json to configurate the inteligent code completion: 
 ```
 {
@@ -128,4 +130,42 @@ Cypress.Commands.add("loginExample", (username, password) => {
 22. currency_exchange.spec.js
 23. transfer_funds.spec.js
 24. find_transaction.spec.js
-25. 
+
+## Visual Regression Testing guide + Percy (in in integration \ visual_regression folder)
+First we need to make sure Cypress is installed and install the Cypress image snapshot plugin by typing: `npm install cypress-image-snapshot` in the therminal (the version installed can be checked in the package.json file).
+* If asked to install peer library or plugin, use `npm install --save-dev required_peer_version`. For example `npm install --save-dev jest@25.4.0` (I got the Warning: `npm WARN jest-image-snapshot@4.2.0 requires a peer of jest@>=20 <=26 but none is installed. You must install peer dependencies yourself.`)
+* Then, we edited the `cypress/plugins/index.js` to create the variable `const { addMatchImageSnapshotPlugin } = require("cypress-image-snapshot/plugin")` and use it in the module export by adding `addMatchImageSnapshotPlugin(on, config)`
+* Now, we need to create custom commands, because there are parameters we need to pass to such commands. so: in **cypress/support/commands.js** we add:
+
+```
+import { addMatchImageSnapshotCommand } from "cypress-image-snapshot/command"
+
+addMatchImageSnapshotCommand ({
+    failureThreshold: 0.00,  // How many pixels of difference will we allow before marking a test as Failed
+    failureThresholdType: "percent", // To specify if we wanna use Percentage or Pixel count
+    customDiffConfig: {threshold: 0.0},
+    capture: "viewport" // If you want to capture the whole Viewport
+})
+
+Cypress.Commands.add("setResolution", (size) => {
+    if (Cypress._.isArray(size)) { // If we receive size as an array (width, height), for example in a desktop version
+        cy.viewport(size[0], size[1]) // We need to fill width and height with the array information, like [1200, 800]
+    } else {
+        cy.viewport(size) // Else, we are just receiving a picture size as a device, like "iphone-6"
+    }
+})
+```
+* And, finally, we create a Script in the **package.json** file, under the option **"scripts"** to use ``when we need to update all base images``:
+```
+"cy:update-snapshots": "cypress run --env updateSnapshots=true"
+```
+
+* As this regression is runing in headless mode, for not running all previous scenarios, Use the command
+`npx cypress run --spec="cypress/integration/visual_regression/responsive_regression.spec.js"`
+* To update a single test's base images, use:
+`npx cypress run --spec="cypress/integration/visual_regression/responsive_regression.spec.js" --env updateSnapshots=true`
+
+* As the regression is run, the folders: **cypress/screenshots/visual_regression/image.spec.js** and **cypress/snapshots/visual_regression/image.spec.js** should appear. In the Snapshot folder, the base images are stored. When running the regression, recent images will be stored in the screenshots folder if there is any difference, and in that case, the regression will fail.
+
+25. image.spec.js
+26. responsive_regression.spec.js

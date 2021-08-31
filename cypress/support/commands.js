@@ -33,3 +33,20 @@ Cypress.Commands.add('loginExample', (username, password) => {
     cy.get('#user_remember_me').click()
     cy.contains('Sign in').click()
 })
+
+import { addMatchImageSnapshotCommand } from "cypress-image-snapshot/command"
+
+addMatchImageSnapshotCommand ({
+    failureThreshold: 0.00,  // How many pixels of difference will we allow before marking a test as Failed
+    failureThresholdType: "percent", // To specify if we wanna use Percentage or Pixel count
+    customDiffConfig: {threshold: 0.0},
+    capture: "viewport" // If you want to capture the whole Viewport
+})
+
+Cypress.Commands.add("setResolution", (size) => {
+    if (Cypress._.isArray(size)) { // If we receive size as an array (width, height), for example in a desktop version
+        cy.viewport(size[0], size[1]) // We need to fill width and height with the array information, like [1200, 800]
+    } else {
+        cy.viewport(size) // Else, we are just receiving a picture size as a device, like "iphone-6"
+    }
+})
