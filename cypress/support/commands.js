@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 
-Cypress.Commands.add("loginExample", (username, password) => {
+Cypress.Commands.add('loginExample', (username, password) => {
     cy.clearCookies()
     cy.clearLocalStorage()
     cy.get('#user_login').clear().type(username) // {delay: 10000} // Delay not working

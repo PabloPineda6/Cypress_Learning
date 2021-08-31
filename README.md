@@ -1,4 +1,4 @@
-# Cypress_Learning
+ # Cypress_Learning
 Automation for software testing with Cypress
 
 
@@ -16,9 +16,13 @@ Automation for software testing with Cypress
 1. Create a containing folder in your PC 
 2. Open that folder with the explorer of Visual Studio Code
 
-## Project configuration and Cypress install
-1. Open the therminal and type: `npm init`, and fill the information required (any info can be eddited or added later in the package.json file) 
-2. Install Cypress by typing: `npm install cypress` (the version installed can be checked in the package.json file)
+### Project configuration and Cypress install
+1. Install Node Js and NPM using the URL https://nodejs.org/en/download/
+    1.1. (Windows) After installation, the system will automatically create nodejs folder in this path “C:\Program Files (x86)” or “C:\Program Files “.
+    1.2. (Windows) Open Control Panel -> User Accounts -> Change my environmental variable and verify the path Variable value “C:\Program Files (x86)\nodejs” or “C:\Program Files \nodejs “.
+    1.3. (Windows) new => user = path => value = C:\Program Files (x86)\nodejs and after apply that and close Editor and restart it.
+2. Open the therminal and type: `npm init`, -> and fill the information required (any info can be eddited or added later in the package.json file), so you can just click enter as meny times as required.
+3. Install Cypress by typing: `npm install cypress` (the version installed can be checked in the package.json file)
 
 - Delete option not used in the file package.json, under the option **"scripts"**: The option `"test": "echo "Error: no test specified" && exit 1"` won't be used, Let's delete it and place this two commands to configure how to run the project through the command window or terminal:
 ```
@@ -26,7 +30,7 @@ Automation for software testing with Cypress
 "cy:run": "cypress run"
 ```
 
-## Prettier install and rules definition 
+### Prettier install and rules definition 
 1. Install Prettier by typing in the therminal: `npm install prettier`. Prettier is an automated code formating tool (the version installed can be checked in the package.json file) 
 2. Create a prettier configuration file named `.prettierrc.json` at the root of the project (right click - New file) 
 3. Create a Json specifying the prettier rules for the project. This are the rules recomended in the course: 
@@ -42,8 +46,8 @@ Automation for software testing with Cypress
 }
 ```
 
-## Setup inteligent code completion (so you don't need to memorize all Cypress comands) 
-1. Open Cypress so it autogenerates it's Cypress folder and structures by typing: npx cypress open 
+### Setup inteligent code completion (so you don't need to memorize all Cypress comands) 
+1. Open Cypress so it autogenerates it's Cypress folder and structures by typing: `npx cypress open` or `npm run cy:open` (thanks to the configuration we did in the file package.json)
 2. It generates a file cypress.json and a folder names cypress. Create a new file in the cypress folder named `tsconfig.json`
 3. Copy and paste the next Json to configurate the inteligent code completion: 
 ```
@@ -61,7 +65,7 @@ Automation for software testing with Cypress
 }
 ```
 
-## cypress.json file configuration (commonly used options) must erase comments for file to work
+### cypress.json file configuration (commonly used options) must erase comments for file to work
 ```
 {
     "baseUrl": "https://www.google.com/", // base URL of your specific project
@@ -75,12 +79,12 @@ Automation for software testing with Cypress
     "pageLoadTimeout": 6000, // how long to wait until load event is finished, 1 minute recomended
     "requestTimeout": 15000, // how long to wait for all requests to be finished, usually 15 s
     "responseTimeout": 15000, // how long to wait for an answer from the server, usuallu 15 s
-    "video": false, // if true: Cypress  video when executing on headless mode
+    "video": false, // if true: Cypress will record video when executing on headless mode
     "failOnStatusCode": false // if true: Cypress returns error on server responses diferent from 2xx or 3xx
 }
 ```
 
-## Custom commands creation at file support \ commands.json
+### Custom commands creation at file support \ commands.json
 example login command:
 
 ```
@@ -94,7 +98,7 @@ Cypress.Commands.add("loginExample", (username, password) => {
 })
 ```
 
-## Course archives generation order in integration \ examples
+# Course archives generation order in integration \ examples
  1. simple.spec.js
  2. web_navigation.spec.js
  3. device_responsive.spec.js
@@ -111,3 +115,15 @@ Cypress.Commands.add("loginExample", (username, password) => {
     a. Install plugin: **npm install cypress-xpath**
     b. In support \ index.js, require plugin by typing: **require('cypress-xpath')**
 14. $.spec.js - jQuery use, not recommended because Cypress methods are faster and consume less memory
+
+## E2E guide start
+### Creation of e2e_tests folder
+15. search.spec.js - it's not trully an E2E, we are just refreshing concepts and warming up
+16. password.spec.js - Simple E2E to keep warming up
+17. navbar.spec.js - Still quite simple E2E
+18. feedback.spec.js
+19. login.spec.js
+20. new_payee.spec.js
+21. payment.spec.js
+22. currency_exchange.spec.js
+23. 

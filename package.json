@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PabloPineda6/Cypress_Learning.git"
+    "url": "git+https://github.com/PabloPineda6/Cypress_Learning.git"
   },
   "keywords": [
     "Testing",
@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/PabloPineda6/Cypress_Learning#readme",
   "dependencies": {
-    "cypress": "^4.9.0",
+    "cypress": "^4.12.1",
     "cypress-xpath": "^1.6.0",
-    "prettier": "^2.0.5"
+    "prettier": "^2.3.2"
   }
 }
