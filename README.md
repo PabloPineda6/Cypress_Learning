@@ -186,4 +186,7 @@ cy.matchImageSnapshot({
 27. single_element.spec.js
 28. login.spec.js
 29. data_tables.spec.js
+
+## Introduction to Percy `https://percy.io/`: A visual review platform that can be integrated with all automation Frameworks
+
 30. 
