@@ -4,13 +4,15 @@ Automation for software testing with Cypress
 
 # This project is being created following the course: Automated Software Testing With Cypress [2020], part of the platform www.Udemy.com. The code editor used is Visual Studio Code
 
+### For Cypress tutorials and documentation, visit: `https://docs.cypress.io/examples/examples/tutorials#Best-Practices`
+
 # Cypress comands for using in the therminal
 - `npm run cy:open` to open cypress "cypress open"
 - `npm run cy:run` to run tests in Headless mode "cypress run" (Cypress will run all tests without a browser displaying)
 - `npx cypress run --spec="cypress/integration/examples/scroll.spec.js"` (npx cypress run --spec="route to spec from root") to run specific test in Headless mode
 
 ## Assertion
-`.should('have.value', '...'), // or other options instead of have.value, like 'be.visible', 'include.value', etc.`
+`.should('have.value', '...'), // or other options instead of have.value, like 'be.visible', 'include.value', .its('age').should('eq', 25), etc.`
 
 ## To configurate the project 
 1. Create a containing folder in your PC 
@@ -161,11 +163,27 @@ Cypress.Commands.add("setResolution", (size) => {
 ```
 
 * As this regression is runing in headless mode, for not running all previous scenarios, Use the command
-`npx cypress run --spec="cypress/integration/visual_regression/responsive_regression.spec.js"`
+`npx cypress run --spec="cypress/integration/visual_regressions/responsive_regression.spec.js"`
 * To update a single test's base images, use:
-`npx cypress run --spec="cypress/integration/visual_regression/responsive_regression.spec.js" --env updateSnapshots=true`
+`npx cypress run --spec="cypress/integration/visual_regressions/responsive_regression.spec.js" --env updateSnapshots=true`
 
-* As the regression is run, the folders: **cypress/screenshots/visual_regression/image.spec.js** and **cypress/snapshots/visual_regression/image.spec.js** should appear. In the Snapshot folder, the base images are stored. When running the regression, recent images will be stored in the screenshots folder if there is any difference, and in that case, the regression will fail.
+* If you are using the **iTerm 2** Therminal (doesn't work with the VSC integrated therminal), you can see a realtime report with the taken images by using the command: `npx cypress run --reporter cypress-image-snapshot/reporter`
+
+* If, when running a test, you don't want it to fail, even when the Screenshots are different from the base images. Use the command: `npx cypress run --env failOnSnapshotDiff=false`
+
+* As the regression is run, the folders: **cypress/screenshots/visual_regressions/image.spec.js** and **cypress/snapshots/visual_regression/image.spec.js** should appear. In the Snapshot folder, the base images are stored. When running the regression, recent images will be stored in the screenshots folder if there is any difference, and in that case, the regression will fail.
+
+* Any time you use the **cy.matchImageSnapshot()** function, you can override it's default values if you explicitly type something like:
+```
+cy.matchImageSnapshot({
+    failureThreshold: 10.00,
+    failureThresholdType: "percent"
+})
+```
 
 25. image.spec.js
-26. responsive_regression.spec.js
+26. responsive_regression.spec.js - when using viewports, like here, don't enclose the it method comment with 'this', instead, use `this` so the ${whatever} content can be displayed correctly
+27. single_element.spec.js
+28. login.spec.js
+29. data_tables.spec.js
+30. 
