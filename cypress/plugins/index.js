@@ -17,11 +17,12 @@
  */
 
 const { addMatchImageSnapshotPlugin } = require("cypress-image-snapshot/plugin")
+// const percyHealthCheck = require("@percy/cypress/task")
+const cucumber = require('cypress-cucumber-preprocessor').default
 
 module.exports = (on, config) => {
+  addMatchImageSnapshotPlugin(on, config) // "on" is used to hook into various events Cypress emits, and "config" is the resolved Cypress config
 
-  addMatchImageSnapshotPlugin(on, config)
-
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  // on('task', percyHealthCheck) // This is the "On" task, for the use of the Percy / Cypress integration
+  on('file:preprocessor', cucumber()) // This is the "On" task, for the use of the Cucumber / Cypress integration
 }

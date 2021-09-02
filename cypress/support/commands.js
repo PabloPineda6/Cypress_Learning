@@ -35,6 +35,7 @@ Cypress.Commands.add('loginExample', (username, password) => {
 })
 
 import { addMatchImageSnapshotCommand } from "cypress-image-snapshot/command"
+import '@percy/cypress'
 
 addMatchImageSnapshotCommand ({
     failureThreshold: 0.00,  // How many pixels of difference will we allow before marking a test as Failed

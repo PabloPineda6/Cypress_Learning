@@ -6,7 +6,8 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cy:update-snapshots": "cypress run --env updateSnapshots=true"
+    "cy:update-snapshots": "cypress run --env updateSnapshots=true",
+    "cy:percy": "percy exec -- cypress run"
   },
   "repository": {
     "type": "git",
@@ -25,11 +26,17 @@
   "homepage": "https://github.com/PabloPineda6/Cypress_Learning#readme",
   "dependencies": {
     "cypress": "^4.12.1",
+    "cypress-cucumber-preprocessor": "^4.2.0",
     "cypress-image-snapshot": "^4.0.1",
     "cypress-xpath": "^1.6.0",
     "prettier": "^2.3.2"
   },
   "devDependencies": {
+    "@percy/cli": "^1.0.0-beta.67",
+    "@percy/cypress": "^3.1.1",
     "jest": "^25.4.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }

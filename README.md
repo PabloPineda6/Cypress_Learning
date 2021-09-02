@@ -84,13 +84,13 @@ Automation for software testing with Cypress
     "requestTimeout": 15000, // how long to wait for all requests to be finished, usually 15 s
     "responseTimeout": 15000, // how long to wait for an answer from the server, usuallu 15 s
     "video": false, // if true: Cypress will record video when executing on headless mode
-    "failOnStatusCode": false // if true: Cypress returns error on server responses diferent from 2xx or 3xx
+    "failOnStatusCode": false, // if true: Cypress returns error on server responses diferent from 2xx or 3xx
+    "ignoreTestFiles": ["*.js", "*.md"] // This is ONLY necesary for integrating Cypress and Cucumber (so far), because .js files are used to store "Page objects" and "Step Definitions" and must not be run separately
 }
 ```
 
 ### Custom commands creation at file support \ commands.json
 example login command:
-
 ```
 Cypress.Commands.add("loginExample", (username, password) => {
     cy.clearCookies()
@@ -133,12 +133,11 @@ Cypress.Commands.add("loginExample", (username, password) => {
 23. transfer_funds.spec.js
 24. find_transaction.spec.js
 
-## Visual Regression Testing guide + Percy (in in integration \ visual_regressions folder)
-First we need to make sure Cypress is installed and install the Cypress image snapshot plugin by typing: `npm install cypress-image-snapshot` in the therminal (the version installed can be checked in the package.json file).
+## Visual Regression Testing guide (in in integration \ visual_regressions folder)
+* First we need to make sure Cypress is installed and install the Cypress image snapshot plugin by typing: `npm install cypress-image-snapshot` in the therminal (the version installed can be checked in the package.json file).
 * If asked to install peer library or plugin, use `npm install --save-dev required_peer_version`. For example `npm install --save-dev jest@25.4.0` (I got the Warning: `npm WARN jest-image-snapshot@4.2.0 requires a peer of jest@>=20 <=26 but none is installed. You must install peer dependencies yourself.`)
-* Then, we edited the `cypress/plugins/index.js` to create the variable `const { addMatchImageSnapshotPlugin } = require("cypress-image-snapshot/plugin")` and use it in the module export by adding `addMatchImageSnapshotPlugin(on, config)`
+* Then, we edited the **cypress/plugins/index.js** to create the variable `const { addMatchImageSnapshotPlugin } = require("cypress-image-snapshot/plugin")` and use it in the module export by adding `addMatchImageSnapshotPlugin(on, config)`
 * Now, we need to create custom commands, because there are parameters we need to pass to such commands. so: in **cypress/support/commands.js** we add:
-
 ```
 import { addMatchImageSnapshotCommand } from "cypress-image-snapshot/command"
 
@@ -187,6 +186,47 @@ cy.matchImageSnapshot({
 28. login.spec.js
 29. data_tables.spec.js
 
-## Introduction to Percy `https://percy.io/`: A visual review platform that can be integrated with all automation Frameworks
+## Percy guide (in in integration \ percy_integration folder)
+# Could not make Percy work
+Percy: `https://percy.io/` is a visual review online platform that can be integrated with all automation Frameworks. It compare base images with taken ones and in it, you can see visual regressions and aprove or request changes to the project. For documentation about the Percy / Cypress integration, visit `https://docs.percy.io/docs/cypress`
 
-30. 
+### To use Percy: 
+* Create free Percy account -> login -> Click on the "New project" button -> Create the project (don't wait for it to build, scroll down) -> Copy "Project token" depending on your Operating System -> Paste it in your project's terminal.
+
+* Add dependencies depending on your Framework, for Cypress use: `npm install @percy/cypress` and `npm install --save-dev @percy/cli @percy/cypress`
+
+* Now, in **Cypress/Support/index.js** type: `import '@percy/cypress'`
+
+* Next, we need to import Percy/Cypress to be able to use the Percy Snapshot Command. so: in **cypress/support/commands.js** we add: `import '@percy/cypress'`
+
+* And, in **cypress/plugins/index.js**, we create the variable `const percyHealthCheck = require("@percy/cypress")` and use it in the module export by adding the "On" task: `on('task', percyHealthCheck)`
+
+* Finaly, to run a Percy Spec, use the command: `npx percy exec -- cypress run`, or you can create a script in **package.json** like: `"cy:percy": "percy exec -- cypress run"` to run Percy with: `npm run cy:percy`
+
+30. percy_basics.spec.js
+
+
+## BDD tests with Cypress/Cucumber guide (in in integration \ BDD_cucumber folder)
+* First we need to make sure Cypress is installed and install the Cypress image snapshot plugin by typing: `npm install cypress-cucumber-preprocessor` in the therminal (the version installed can be checked in the package.json file).
+
+* Its VERY IMPORTANT to add in the **cypress.json** file:
+```
+    "ignoreTestFiles": ["*.js", "*.md"] // This is ONLY necesary for integrating Cypress and Cucumber (so far), because .js files are used to store "Page objects" and "Step Definitions" and must not be run separately
+```
+
+* Then, in **cypress/plugins/index.js**, we create the variable `const cucumber = require('cypress-cucumber-preprocessor').default` and use it in the module export by adding the "On" task: `on('file:preprocessor', cucumber())`
+
+* Also, in the **package.json** file, we need to bind our Step Definitions to our Features by setting them to true by adding, bellow the dependencies:
+```
+,
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  }
+```
+
+* And finally, we need a plugin to display and build cucumber in VSC, like: `https://marketplace.visualstudio.com/items?itemName=alexkrechik.cucumberautocomplete`
+
+* To run ONLY one or a few selected scenarios (for debugging or so), use the tag: `@focus`
+
+31. login.feature - Also **integration \ BDD_cucumber \ login** folder with Step Definition files and page objects, and **integration \ common** folder: `ALL STEPS SHARED AMONG FEATURES MUST BE IN THIS FOLDER` or they won't work
+32. feedback.feature - Also **integration \ BDD_cucumber \ feedback** folder with Step Definition files and page objects
