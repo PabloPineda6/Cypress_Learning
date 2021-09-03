@@ -65,6 +65,9 @@ Automation for software testing with Cypress
     },
     "include": [
         "**/*.*"
+    ],
+    "exclude": [
+        "./built/**/*"
     ]
 }
 ```
@@ -230,3 +233,27 @@ Percy: `https://percy.io/` is a visual review online platform that can be integr
 
 31. login.feature - Also **integration \ BDD_cucumber \ login** folder with Step Definition files and page objects, and **integration \ common** folder: `ALL STEPS SHARED AMONG FEATURES MUST BE IN THIS FOLDER` or they won't work
 32. feedback.feature - Also **integration \ BDD_cucumber \ feedback** folder with Step Definition files and page objects
+
+## CI/CD Cypress Dashboard integration with Jenkins (Jenkins / CircleCI / Travis)
+
+* To connect a Cypress project to the **Cypress Dashboard Service**, first we need to run Cypress -> In the Cypress interface, we click on the **Run** Option -> Setup project to record -> Login to Dashboard (and actually login or create an account, Profile's name and organization), select public or private project to allow anyone to see recordings of runs or only invited users -> verify the **cypress.json** file contains the given projectId -> Create a script in the **package.json** file torecord every run, something like `"cy:dashboard": "cypress run --record --key <project's_key>"` -> close Cypress and open it with the command `npm run cy:dashboard` (or whatever you called the script) or `npx cypress run --spec="cypress/integration/visual_regressions/responsive_regression.spec.js" --record --key <project's_key>` to run a single Spec or feature
+
+npx cypress run --spec="cypress/integration/visual_regressions/responsive_regression.spec.js" --record --key 32ae411a-83ad-4e48-adf1-5487c17cb889
+
+* For the tests to take and display Videos, in the **cypress.json** file, toggle `"video": true`
+
+
+* To connect a Cypress project to the **Jenkins**, first we need to download the Jenkins application from `https://www.jenkins.io/download/` (LTS Generic Java package (.war) option is recommended) -> move the downloaded package to the project's folder
+
+- If Java isn't installed in your machine, download it from `https://www.java.com/en/download/manual.jsp` and install it -> 
+
+* Start Jenkins server through the Terminal by typing `java -jar jenkins.war -httpPort=8080 --enable-future-java`
+
+- If you are getting the error `java : The term 'java' is not recognized as the name of a...`, in the Therminal, type `sysdm.cpl` -> In the window that came up, navigate to the `Advanced` tab -> Click on the `Environment Variables` button -> under System Variables, doble click on `path` -> verify Java is not on the list -> copy the location of your java installation (the bin directory) -> click on the `New` button -> add the copied path (something like `C:\Program Files (x86)\Java\jre%YOUR_JAVA_VERSION%\bin`) -> click `OK` -> Restart VSC
+
+- If it's your first time installing Jenkins in your machine, you should receive an Admin pass and a Web page should open, if the page doesn't open, hopefully it still is: `http://localhost:8080/login?from=%2F` -> open the Web page and paste the received password -> by default, Jenkins URL will be `http://localhost:8080/` but the best practice is to set this value to the URL that users are expected to use. This will avoid confusion when sharing or viewing links.
+
+* Create a new Cypress build in Jenins by opening the application in the selected URL or `http://localhost:8080/` by default -> signing in -> Click on `New Item` -> enter a name -> Freestyle project -> Fill the description of the configuration form -> Click on `Advanced` -> Select `Use custom workspace` -> in the Terminal, click `+` to open a second Terminal and type `pwd` -> copy the project's path and paste it in the `Custom workspace Directory field` -> type the project's name in `Display Name` -> in `Build`, `Add build step` pick: the `Execute Windows batch command` option for Windows, or the `Execute shell` option for linux or Mac -> in the recently opened Comand field type the Script `npm run cy:run` -> Save the configuration
+
+
+33. 

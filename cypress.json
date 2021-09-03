@@ -1,15 +1,19 @@
 {
-    "whatchForFileChanges": true,
-    "viewportWidth": 1000,
-    "viewportHeight": 600,
-    "waitForAnimation": true,
-    "animationDistanceTreshold": 20,
-    "defaultCommandTimeout": 5000,
-    "execTimeout": 6000,
-    "pageLoadTimeout": 6000,
-    "requestTimeout": 15000,
-    "responseTimeout": 15000,
-    "video": false,
-    "failOnStatusCode": false,
-    "ignoreTestFiles": ["*.js", "*.md"]
+  "whatchForFileChanges": true,
+  "viewportWidth": 1000,
+  "viewportHeight": 600,
+  "waitForAnimation": true,
+  "animationDistanceTreshold": 20,
+  "defaultCommandTimeout": 5000,
+  "execTimeout": 6000,
+  "pageLoadTimeout": 6000,
+  "requestTimeout": 15000,
+  "responseTimeout": 15000,
+  "video": true,
+  "failOnStatusCode": false,
+  "ignoreTestFiles": [
+    "*.js",
+    "*.md"
+  ],
+  "projectId": "9o5un5"
 }

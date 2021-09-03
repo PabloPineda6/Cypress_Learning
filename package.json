@@ -7,7 +7,8 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:update-snapshots": "cypress run --env updateSnapshots=true",
-    "cy:percy": "percy exec -- cypress run"
+    "cy:percy": "percy exec -- cypress run",
+    "cy:dashboard": "cypress run --record --key 32ae411a-83ad-4e48-adf1-5487c17cb889"
   },
   "repository": {
     "type": "git",

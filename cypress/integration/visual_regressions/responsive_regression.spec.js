@@ -1,4 +1,4 @@
-const pages = ["https://example.com/", 'http://zero.webappsecurity.com/']
+const pages = ["https://example.com/", 'http://zero.webappsecurity.com/', 'https://devexpress.github.io/testcafe/example/']
 
 const sizes = ["iphone-6", "ipad-2", [1200, 800]]
 
